@@ -6,32 +6,31 @@
 	objectVersion = 77;
 	objects = {
 
-/* Begin PBXContainerItemProxy section */
-		39C7713D2F0BCD8C00847E06 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 39C7711E2F0BCD8900847E06 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 39C771252F0BCD8900847E06;
-			remoteInfo = MovieABB;
-		};
-		39C771472F0BCD8C00847E06 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 39C7711E2F0BCD8900847E06 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 39C771252F0BCD8900847E06;
-			remoteInfo = MovieABB;
-		};
-/* End PBXContainerItemProxy section */
+/* Begin PBXBuildFile section */
+		395A5B302F0D8EA600433162 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 395A5B2F2F0D8EA600433162 /* SnapKit */; };
+		395A5B6F2F0D9B0900433162 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 395A5B6E2F0D9B0900433162 /* Kingfisher */; };
+/* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		39C771262F0BCD8900847E06 /* MovieABB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieABB.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		39C7713C2F0BCD8C00847E06 /* MovieABBTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MovieABBTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		39C771462F0BCD8C00847E06 /* MovieABBUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MovieABBUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		395A5B2D2F0D8CBD00433162 /* Exceptions for "MovieABB" folder in "MovieABB" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 39C771252F0BCD8900847E06 /* MovieABB */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		39C771282F0BCD8900847E06 /* MovieABB */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				395A5B2D2F0D8CBD00433162 /* Exceptions for "MovieABB" folder in "MovieABB" target */,
+			);
 			path = MovieABB;
 			sourceTree = "<group>";
 		};
@@ -42,20 +41,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		39C771392F0BCD8C00847E06 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		39C771432F0BCD8C00847E06 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				395A5B6F2F0D9B0900433162 /* Kingfisher in Frameworks */,
+				395A5B302F0D8EA600433162 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,8 +61,6 @@
 			isa = PBXGroup;
 			children = (
 				39C771262F0BCD8900847E06 /* MovieABB.app */,
-				39C7713C2F0BCD8C00847E06 /* MovieABBTests.xctest */,
-				39C771462F0BCD8C00847E06 /* MovieABBUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -100,50 +85,12 @@
 			);
 			name = MovieABB;
 			packageProductDependencies = (
+				395A5B2F2F0D8EA600433162 /* SnapKit */,
+				395A5B6E2F0D9B0900433162 /* Kingfisher */,
 			);
 			productName = MovieABB;
 			productReference = 39C771262F0BCD8900847E06 /* MovieABB.app */;
 			productType = "com.apple.product-type.application";
-		};
-		39C7713B2F0BCD8C00847E06 /* MovieABBTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 39C771542F0BCD8C00847E06 /* Build configuration list for PBXNativeTarget "MovieABBTests" */;
-			buildPhases = (
-				39C771382F0BCD8C00847E06 /* Sources */,
-				39C771392F0BCD8C00847E06 /* Frameworks */,
-				39C7713A2F0BCD8C00847E06 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				39C7713E2F0BCD8C00847E06 /* PBXTargetDependency */,
-			);
-			name = MovieABBTests;
-			packageProductDependencies = (
-			);
-			productName = MovieABBTests;
-			productReference = 39C7713C2F0BCD8C00847E06 /* MovieABBTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		39C771452F0BCD8C00847E06 /* MovieABBUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 39C771572F0BCD8C00847E06 /* Build configuration list for PBXNativeTarget "MovieABBUITests" */;
-			buildPhases = (
-				39C771422F0BCD8C00847E06 /* Sources */,
-				39C771432F0BCD8C00847E06 /* Frameworks */,
-				39C771442F0BCD8C00847E06 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				39C771482F0BCD8C00847E06 /* PBXTargetDependency */,
-			);
-			name = MovieABBUITests;
-			packageProductDependencies = (
-			);
-			productName = MovieABBUITests;
-			productReference = 39C771462F0BCD8C00847E06 /* MovieABBUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
@@ -158,14 +105,6 @@
 					39C771252F0BCD8900847E06 = {
 						CreatedOnToolsVersion = 16.4;
 					};
-					39C7713B2F0BCD8C00847E06 = {
-						CreatedOnToolsVersion = 16.4;
-						TestTargetID = 39C771252F0BCD8900847E06;
-					};
-					39C771452F0BCD8C00847E06 = {
-						CreatedOnToolsVersion = 16.4;
-						TestTargetID = 39C771252F0BCD8900847E06;
-					};
 				};
 			};
 			buildConfigurationList = 39C771212F0BCD8900847E06 /* Build configuration list for PBXProject "MovieABB" */;
@@ -177,34 +116,22 @@
 			);
 			mainGroup = 39C7711D2F0BCD8900847E06;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				395A5B2E2F0D8EA500433162 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				395A5B6D2F0D9B0900433162 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 39C771272F0BCD8900847E06 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				39C771252F0BCD8900847E06 /* MovieABB */,
-				39C7713B2F0BCD8C00847E06 /* MovieABBTests */,
-				39C771452F0BCD8C00847E06 /* MovieABBUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		39C771242F0BCD8900847E06 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		39C7713A2F0BCD8C00847E06 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		39C771442F0BCD8C00847E06 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -221,34 +148,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		39C771382F0BCD8C00847E06 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		39C771422F0BCD8C00847E06 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		39C7713E2F0BCD8C00847E06 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 39C771252F0BCD8900847E06 /* MovieABB */;
-			targetProxy = 39C7713D2F0BCD8C00847E06 /* PBXContainerItemProxy */;
-		};
-		39C771482F0BCD8C00847E06 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 39C771252F0BCD8900847E06 /* MovieABB */;
-			targetProxy = 39C771472F0BCD8C00847E06 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		39C771502F0BCD8C00847E06 /* Debug */ = {
@@ -422,74 +322,6 @@
 			};
 			name = Release;
 		};
-		39C771552F0BCD8C00847E06 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.Cicek.MovieABBTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MovieABB.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MovieABB";
-			};
-			name = Debug;
-		};
-		39C771562F0BCD8C00847E06 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.Cicek.MovieABBTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MovieABB.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MovieABB";
-			};
-			name = Release;
-		};
-		39C771582F0BCD8C00847E06 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.Cicek.MovieABBUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = MovieABB;
-			};
-			name = Debug;
-		};
-		39C771592F0BCD8C00847E06 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.Cicek.MovieABBUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = MovieABB;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -511,25 +343,39 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		39C771542F0BCD8C00847E06 /* Build configuration list for PBXNativeTarget "MovieABBTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				39C771552F0BCD8C00847E06 /* Debug */,
-				39C771562F0BCD8C00847E06 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		39C771572F0BCD8C00847E06 /* Build configuration list for PBXNativeTarget "MovieABBUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				39C771582F0BCD8C00847E06 /* Debug */,
-				39C771592F0BCD8C00847E06 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		395A5B2E2F0D8EA500433162 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
+		395A5B6D2F0D9B0900433162 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.6.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		395A5B2F2F0D8EA600433162 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 395A5B2E2F0D8EA500433162 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		395A5B6E2F0D9B0900433162 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 395A5B6D2F0D9B0900433162 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 39C7711E2F0BCD8900847E06 /* Project object */;
 }

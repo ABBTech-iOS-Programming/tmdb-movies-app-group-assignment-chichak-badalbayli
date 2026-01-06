@@ -25,20 +25,35 @@ final class DefaultNetworkService: NetworkService {
         case .success(let request):
             session.dataTask(with: request) { data, response, error in
                 if let error {
-                    completion(.failure(.unknown(error)))
+                    DispatchQueue.main.async {
+                        completion(.failure(.unknown(error)))
+                    }
+                    return
                 }
                 if let httpResponse = response as? HTTPURLResponse {
                     let statusCode = httpResponse.statusCode
                     guard (200...299).contains(statusCode) else {
-                        return completion(.failure(.serverError(statusCode: statusCode)))
+                        DispatchQueue.main.async {
+                            completion(.failure(.serverError(statusCode: statusCode)))
+                        }
+                        return
                     }
                 }
-                guard let data else { return completion(.failure(.noData))}
+                guard let data else {
+                    DispatchQueue.main.async {
+                        completion(.failure(.noData))
+                    }
+                    return
+                }
                 do {
                     let decodedData = try JSONDecoder().decode(T.self, from: data)
-                    completion(.success(decodedData))
+                    DispatchQueue.main.async {
+                        completion(.success(decodedData))
+                    }
                 } catch {
-                    completion(.failure(.decodingError))
+                    DispatchQueue.main.async {
+                        completion(.failure(.decodingError))
+                    }
                 }
             }.resume()
             
