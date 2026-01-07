@@ -12,6 +12,7 @@ import SnapKit
 public final class MovieListController: UIViewController {
     
     private var viewModel: MovieListViewModel
+    private var selectedCategory: MovieCategory = .popular
     
     //MARK: - UIElements
     
@@ -22,9 +23,18 @@ public final class MovieListController: UIViewController {
         )
         collection.register(
             TrendingMovieCell.self,
-            forCellWithReuseIdentifier: TrendingMovieCell.id
+            forCellWithReuseIdentifier: TrendingMovieCell.reuseIdentifier
+        )
+        collection.register(
+            MovieListCell.self,
+            forCellWithReuseIdentifier: MovieListCell.reuseIdentifier
+        )
+        collection.register(
+            MovieCategoryCell.self,
+            forCellWithReuseIdentifier: MovieCategoryCell.reuseIdentifier
         )
         collection.dataSource = self
+        collection.delegate = self
         collection.backgroundColor = UIColor(named: "backgroundGray")
         return collection
     }()
@@ -47,6 +57,7 @@ public final class MovieListController: UIViewController {
         setupUI()
         bindViewModel()
         viewModel.loadTrending()
+        viewModel.loadMovies(category: .popular)
     }
     
     // MARK: - Setup
@@ -71,7 +82,9 @@ public final class MovieListController: UIViewController {
     
     private func bindViewModel() {
         viewModel.onDataReload = { [weak self] in
-            self?.collectionView.reloadData()
+            DispatchQueue.main.async {
+                self?.collectionView.reloadData()
+            }
         }
     }
 }
@@ -79,11 +92,12 @@ public final class MovieListController: UIViewController {
 extension MovieListController {
 
     func createLayout() -> UICollectionViewLayout {
-        UICollectionViewCompositionalLayout { sectionIndex, _ in
-            if sectionIndex == 0 {
-                return self.trendingListSection()
-            } else {
-                return self.movieListSection()
+        UICollectionViewCompositionalLayout { section, _ in
+            switch section {
+            case 0: return self.trendingListSection()
+            case 1: return self.categorySection()
+            case 2: return self.movieListSection()
+            default: return nil
             }
         }
     }
@@ -108,7 +122,7 @@ extension MovieListController {
         section.contentInsets = .init(
             top: 21,
             leading: 24,
-            bottom: 64,
+            bottom: 24,
             trailing: 24
         )
         return section
@@ -132,9 +146,36 @@ extension MovieListController {
         let section = NSCollectionLayoutSection(group: group)
         section.interGroupSpacing = 18
         section.contentInsets = .init(
-            top: 64,
+            top: 20,
             leading: 24,
             bottom: 0,
+            trailing: 24
+        )
+        return section
+    }
+    
+    func categorySection() -> NSCollectionLayoutSection {
+
+        let item = NSCollectionLayoutItem(
+            layoutSize: .init(
+                widthDimension: .estimated(359),
+                heightDimension: .absolute(41)
+            )
+        )
+        let group = NSCollectionLayoutGroup.horizontal(
+            layoutSize: .init(
+                widthDimension: .estimated(359),
+                heightDimension: .absolute(41)
+            ),
+            subitems: [item]
+        )
+        let section = NSCollectionLayoutSection(group: group)
+        section.orthogonalScrollingBehavior = .groupPaging
+        section.interGroupSpacing = 16
+        section.contentInsets = .init(
+            top: 24,
+            leading: 20,
+            bottom: 20,
             trailing: 24
         )
         return section
@@ -146,31 +187,77 @@ extension MovieListController: UICollectionViewDataSource {
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int
     ) -> Int {
-        if section == 0 {
+
+        switch section {
+        case 0:
             return viewModel.trendingMovies.count
+        case 1:
+            return MovieCategory.allCases.count
+        case 2:
+            return viewModel.movies.count
+        default:
+            return 0
         }
-        return 0 
     }
 
     public func numberOfSections(in collectionView: UICollectionView) -> Int {
-        2
+        3
     }
 
     public func collectionView(
         _ collectionView: UICollectionView,
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
-        if indexPath.section == 0 {
-            guard let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: TrendingMovieCell.id,
+
+        switch indexPath.section {
+
+        case 0:
+            let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: TrendingMovieCell.reuseIdentifier,
                 for: indexPath
-            ) as? TrendingMovieCell else {
-                return UICollectionViewCell()
-            }
-            let movie = viewModel.trendingMovies[indexPath.item]
-            cell.configure(with: movie, rank: indexPath.item + 1)
+            ) as! TrendingMovieCell
+
+            cell.configure(
+                with: viewModel.trendingMovies[indexPath.item],
+                rank: indexPath.item
+            )
             return cell
+        case 1:
+            let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: MovieCategoryCell.reuseIdentifier,
+                for: indexPath
+            ) as! MovieCategoryCell
+
+            let category = MovieCategory.allCases[indexPath.item]
+            cell.configure(
+                title: category.title,
+                selected: category == selectedCategory
+            )
+            return cell
+        case 2:
+            let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: MovieListCell.reuseIdentifier,
+                for: indexPath
+            ) as! MovieListCell
+
+            cell.configure(with: viewModel.movies[indexPath.item])
+            return cell
+
+        default:
+            return UICollectionViewCell()
         }
-        return UICollectionViewCell()
+    }
+}
+extension MovieListController: UICollectionViewDelegate {
+
+    public func collectionView(
+        _ collectionView: UICollectionView,
+        didSelectItemAt indexPath: IndexPath
+    ) {
+        guard indexPath.section == 1 else { return }
+        let category = MovieCategory.allCases[indexPath.item]
+        selectedCategory = category
+        viewModel.loadMovies(category: category)
+        collectionView.reloadData()
     }
 }

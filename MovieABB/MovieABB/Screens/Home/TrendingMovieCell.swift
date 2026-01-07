@@ -11,7 +11,7 @@ import Kingfisher
 
 final class TrendingMovieCell: UICollectionViewCell {
 
-    static let id = "TrendingMovieCell"
+    static let reuseIdentifier = "TrendingMovieCell"
 
     // MARK: - UI
 
@@ -20,14 +20,12 @@ final class TrendingMovieCell: UICollectionViewCell {
         image.contentMode = .scaleAspectFill
         image.clipsToBounds = true
         image.layer.cornerRadius = 16
-        image.backgroundColor = .systemBlue
         return image
     }()
 
     private let rankingLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 96, weight: .semibold)
-        label.textColor = UIColor.systemBlue.withAlphaComponent(0.5)
         return label
     }()
 

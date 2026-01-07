@@ -19,6 +19,10 @@ enum TMDBConfig {
 
 enum PostsEndpoints {
     case getTrending(TimeWindow)
+    case getNowPlaying
+    case getPopular
+    case getUpcoming
+    case getTopRated
 }
 
 extension PostsEndpoints: Endpoint {
@@ -29,6 +33,14 @@ extension PostsEndpoints: Endpoint {
         switch self {
         case .getTrending(let timeWindow):
             return "/3/trending/movie/\(timeWindow.rawValue)"
+        case .getNowPlaying:
+            return "/3/movie/now_playing"
+        case .getPopular:
+            return "/3/movie/popular"
+        case .getUpcoming:
+            return "/3/movie/upcoming"
+        case .getTopRated:
+            return "/3/movie/top_rated"
         }
     }
     var method: HttpMethod {
