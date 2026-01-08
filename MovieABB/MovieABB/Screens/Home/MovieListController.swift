@@ -16,6 +16,16 @@ public final class MovieListController: UIViewController {
     
     //MARK: - UIElements
     
+    private let searchView = SearchView()
+    
+    private let titleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "What do you want to watch?"
+        label.font = .systemFont(ofSize: 22, weight: .semibold)
+        label.textColor = .white
+        return label
+    }()
+    
     private lazy var collectionView: UICollectionView = {
         let collection = UICollectionView(
             frame: view.bounds,
@@ -70,11 +80,24 @@ public final class MovieListController: UIViewController {
     
     private func addSubviews() {
         [
+            titleLabel,
+            searchView,
             collectionView
         ].forEach(view.addSubview(_:))
     }
     
     private func setupConstraints() {
+        titleLabel.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(16)
+            make.leading.trailing.equalToSuperview().inset(20)
+        }
+
+        searchView.snp.makeConstraints { make in
+            make.top.equalTo(titleLabel.snp.bottom).offset(12)
+            make.leading.trailing.equalToSuperview().inset(20)
+            make.height.equalTo(44)
+        }
+
         collectionView.snp.makeConstraints { make in
             make.top.equalTo(searchView.snp.bottom).offset(12)
             make.leading.trailing.equalToSuperview()
