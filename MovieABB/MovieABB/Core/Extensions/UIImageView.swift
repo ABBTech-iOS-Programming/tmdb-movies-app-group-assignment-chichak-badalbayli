@@ -14,7 +14,6 @@ extension UIImageView {
         let url = path.flatMap {
             URL(string: "https://image.tmdb.org/t/p/w500\($0)")
         }
-
         kf.setImage(
             with: url,
             placeholder: UIImage(systemName: "photo"),

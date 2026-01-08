@@ -65,7 +65,7 @@ public final class MovieListController: UIViewController {
     private func setupUI() {
         addSubviews()
         setupConstraints()
-        view.backgroundColor = .gray
+        view.backgroundColor = UIColor(named: "backgroundGray")
     }
     
     private func addSubviews() {
@@ -76,10 +76,12 @@ public final class MovieListController: UIViewController {
     
     private func setupConstraints() {
         collectionView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.top.equalTo(searchView.snp.bottom).offset(12)
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalTo(view.safeAreaLayoutGuide)
         }
     }
-    
+
     private func bindViewModel() {
         viewModel.onDataReload = { [weak self] in
             DispatchQueue.main.async {
@@ -155,28 +157,27 @@ extension MovieListController {
     }
     
     func categorySection() -> NSCollectionLayoutSection {
-
         let item = NSCollectionLayoutItem(
             layoutSize: .init(
-                widthDimension: .estimated(359),
+                widthDimension: .estimated(1),
                 heightDimension: .absolute(41)
             )
         )
         let group = NSCollectionLayoutGroup.horizontal(
             layoutSize: .init(
-                widthDimension: .estimated(359),
+                widthDimension: .estimated(1),
                 heightDimension: .absolute(41)
             ),
             subitems: [item]
         )
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .groupPaging
-        section.interGroupSpacing = 16
+        section.interGroupSpacing = 20
         section.contentInsets = .init(
             top: 24,
-            leading: 20,
+            leading: 24,
             bottom: 20,
-            trailing: 24
+            trailing: 0
         )
         return section
     }
@@ -249,7 +250,6 @@ extension MovieListController: UICollectionViewDataSource {
     }
 }
 extension MovieListController: UICollectionViewDelegate {
-
     public func collectionView(
         _ collectionView: UICollectionView,
         didSelectItemAt indexPath: IndexPath
