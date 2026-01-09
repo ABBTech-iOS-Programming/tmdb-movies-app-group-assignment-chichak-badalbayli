@@ -36,6 +36,7 @@ final class MovieListViewModel {
     
     private(set) var trendingMovies: [MovieDTO] = []
     private(set) var movies: [MovieDTO] = []
+    var currentCategory: MovieCategory = .popular
 
     var onDataReload: (() -> Void)?
     var onError: ((NetworkError) -> Void)?
@@ -60,6 +61,7 @@ final class MovieListViewModel {
     }
     
     func loadMovies(category: MovieCategory) {
+        currentCategory = category
         requestMovies(endpoint: category.endpoint)
     }
 
@@ -71,6 +73,25 @@ final class MovieListViewModel {
                 self?.movies = response.results
                 self?.onDataReload?()
 
+            case .failure(let error):
+                self?.onError?(error)
+            }
+        }
+    }
+    
+    func searchMovies(query: String) {
+        guard !query.isEmpty else {
+            loadMovies(category: currentCategory)
+            return
+        }
+
+        networkService.request(
+            PostsEndpoints.searchMovie(query: query)
+        ) { [weak self] (result: Result<MoviesResponseDTO, NetworkError>) in
+            switch result {
+            case .success(let response):
+                self?.movies = response.results
+                self?.onDataReload?()
             case .failure(let error):
                 self?.onError?(error)
             }

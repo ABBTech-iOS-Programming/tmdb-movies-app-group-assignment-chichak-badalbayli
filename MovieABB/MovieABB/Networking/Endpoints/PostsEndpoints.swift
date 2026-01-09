@@ -23,6 +23,7 @@ enum PostsEndpoints {
     case getPopular
     case getUpcoming
     case getTopRated
+    case searchMovie(query: String)
 }
 
 extension PostsEndpoints: Endpoint {
@@ -41,6 +42,8 @@ extension PostsEndpoints: Endpoint {
             return "/3/movie/upcoming"
         case .getTopRated:
             return "/3/movie/top_rated"
+        case .searchMovie:
+            return "/3/search/movie"
         }
     }
     var method: HttpMethod {
@@ -53,7 +56,14 @@ extension PostsEndpoints: Endpoint {
         ]
     }
     var queryItems: [URLQueryItem]? {
-        nil
+        switch self {
+        case .searchMovie(let query):
+            return [
+                URLQueryItem(name: "query", value: query)
+            ]
+        default:
+            return nil
+        }
     }
     var httpBody: (any Encodable)? {
         return nil

@@ -10,6 +10,8 @@ import SnapKit
 
 final class SearchView: UIView {
     
+    var onSearch: ((String) -> Void)?
+    
     // MARK: - UI
     
     private let textField: UITextField = {
@@ -40,6 +42,7 @@ final class SearchView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()
+        textField.delegate = self
     }
     
     required init?(coder: NSCoder) {
@@ -73,5 +76,13 @@ final class SearchView: UIView {
             make.trailing.equalTo(searchIcon.snp.leading).offset(-12)
             make.top.bottom.equalToSuperview()
         }
+    }
+}
+
+extension SearchView: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        onSearch?(textField.text ?? "")
+        return true
     }
 }

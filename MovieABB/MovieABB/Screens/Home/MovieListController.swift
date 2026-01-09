@@ -12,7 +12,7 @@ import SnapKit
 public final class MovieListController: UIViewController {
     
     private var viewModel: MovieListViewModel
-    private var selectedCategory: MovieCategory = .popular
+   // private var selectedCategory: MovieCategory = .popular
     
     //MARK: - UIElements
     
@@ -110,6 +110,9 @@ public final class MovieListController: UIViewController {
             DispatchQueue.main.async {
                 self?.collectionView.reloadData()
             }
+        }
+        searchView.onSearch = { [weak self] text in
+            self?.viewModel.searchMovies(query: text)
         }
     }
 }
@@ -211,7 +214,6 @@ extension MovieListController: UICollectionViewDataSource {
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int
     ) -> Int {
-
         switch section {
         case 0:
             return viewModel.trendingMovies.count
@@ -234,7 +236,6 @@ extension MovieListController: UICollectionViewDataSource {
     ) -> UICollectionViewCell {
 
         switch indexPath.section {
-
         case 0:
             let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: TrendingMovieCell.reuseIdentifier,
@@ -255,7 +256,7 @@ extension MovieListController: UICollectionViewDataSource {
             let category = MovieCategory.allCases[indexPath.item]
             cell.configure(
                 title: category.title,
-                selected: category == selectedCategory
+                selected: category == viewModel.currentCategory
             )
             return cell
         case 2:
@@ -266,7 +267,6 @@ extension MovieListController: UICollectionViewDataSource {
 
             cell.configure(with: viewModel.movies[indexPath.item])
             return cell
-
         default:
             return UICollectionViewCell()
         }
@@ -279,7 +279,6 @@ extension MovieListController: UICollectionViewDelegate {
     ) {
         guard indexPath.section == 1 else { return }
         let category = MovieCategory.allCases[indexPath.item]
-        selectedCategory = category
         viewModel.loadMovies(category: category)
         collectionView.reloadData()
     }
