@@ -12,7 +12,6 @@ import SnapKit
 public final class MovieListController: UIViewController {
     
     private var viewModel: MovieListViewModel
-   // private var selectedCategory: MovieCategory = .popular
     
     //MARK: - UIElements
     
