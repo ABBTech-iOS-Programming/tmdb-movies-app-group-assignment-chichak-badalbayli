@@ -17,7 +17,7 @@ enum TMDBConfig {
     static let baseURL = "https://api.themoviedb.org"
 }
 
-enum PostsEndpoints {
+enum MoviesEndpoints {
     case getTrending(TimeWindow)
     case getNowPlaying
     case getPopular
@@ -26,7 +26,7 @@ enum PostsEndpoints {
     case searchMovie(query: String)
 }
 
-extension PostsEndpoints: Endpoint {
+extension MoviesEndpoints: Endpoint {
     var baseURL: String {
         return TMDBConfig.baseURL
     }

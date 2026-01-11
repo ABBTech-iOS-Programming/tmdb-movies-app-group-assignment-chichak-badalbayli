@@ -22,7 +22,7 @@ enum MovieCategory: Int, CaseIterable {
         }
     }
 
-    var endpoint: PostsEndpoints {
+    var endpoint: MoviesEndpoints {
         switch self {
         case .nowPlaying: return .getNowPlaying
         case .popular: return .getPopular
@@ -49,7 +49,7 @@ final class MovieListViewModel {
     func loadTrending() {
         onStateChange?(.loading)
         networkService.request(
-            PostsEndpoints.getTrending(.day)
+            MoviesEndpoints.getTrending(.day)
         ) { [weak self] (result: Result<MoviesResponseDTO, NetworkError>) in
             DispatchQueue.main.async {
                 switch result {
@@ -68,7 +68,7 @@ final class MovieListViewModel {
         requestMovies(endpoint: category.endpoint)
     }
 
-    private func requestMovies(endpoint: PostsEndpoints) {
+    private func requestMovies(endpoint: MoviesEndpoints) {
         onStateChange?(.loading)
         networkService.request(endpoint) { [weak self]
             (result: Result<MoviesResponseDTO, NetworkError>) in
@@ -91,7 +91,7 @@ final class MovieListViewModel {
         }
         onStateChange?(.loading)
         networkService.request(
-            PostsEndpoints.searchMovie(query: query)
+            MoviesEndpoints.searchMovie(query: query)
         ) { [weak self] (result: Result<MoviesResponseDTO, NetworkError>) in
             DispatchQueue.main.async {
                 switch result {
