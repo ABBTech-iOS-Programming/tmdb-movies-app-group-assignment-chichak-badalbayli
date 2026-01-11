@@ -5,6 +5,8 @@
 //  Created by Chichek on 06.01.26.
 //
 
+import UIKit
+
 enum MovieCategory: Int, CaseIterable {
     case nowPlaying
     case popular
@@ -38,24 +40,25 @@ final class MovieListViewModel {
     private(set) var movies: [MovieDTO] = []
     var currentCategory: MovieCategory = .popular
 
-    var onDataReload: (() -> Void)?
-    var onError: ((NetworkError) -> Void)?
+    var onStateChange: ((ViewState) -> Void)?
 
     init(networkService: NetworkService = DefaultNetworkService()) {
         self.networkService = networkService
     }
 
     func loadTrending() {
+        onStateChange?(.loading)
         networkService.request(
-            PostsEndpoints.getTrending(
-                .day)
+            PostsEndpoints.getTrending(.day)
         ) { [weak self] (result: Result<MoviesResponseDTO, NetworkError>) in
-            switch result {
-            case .success(let response):
-                self?.trendingMovies = response.results
-                self?.onDataReload?()
-            case .failure(let error):
-                self?.onError?(error)
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let response):
+                    self?.trendingMovies = response.results
+                    self?.onStateChange?(.success)
+                case .failure:
+                    self?.onStateChange?(.error("Failed to load trending movies"))
+                }
             }
         }
     }
@@ -66,15 +69,17 @@ final class MovieListViewModel {
     }
 
     private func requestMovies(endpoint: PostsEndpoints) {
+        onStateChange?(.loading)
         networkService.request(endpoint) { [weak self]
             (result: Result<MoviesResponseDTO, NetworkError>) in
-            switch result {
-            case .success(let response):
-                self?.movies = response.results
-                self?.onDataReload?()
-
-            case .failure(let error):
-                self?.onError?(error)
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let response):
+                    self?.movies = response.results
+                    self?.onStateChange?(.success)
+                case .failure:
+                    self?.onStateChange?(.error("Failed to load movies"))
+                }
             }
         }
     }
@@ -84,16 +89,18 @@ final class MovieListViewModel {
             loadMovies(category: currentCategory)
             return
         }
-
+        onStateChange?(.loading)
         networkService.request(
             PostsEndpoints.searchMovie(query: query)
         ) { [weak self] (result: Result<MoviesResponseDTO, NetworkError>) in
-            switch result {
-            case .success(let response):
-                self?.movies = response.results
-                self?.onDataReload?()
-            case .failure(let error):
-                self?.onError?(error)
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let response):
+                    self?.movies = response.results
+                    self?.onStateChange?(.success)
+                case .failure:
+                    self?.onStateChange?(.error("Failed to search movies"))
+                }
             }
         }
     }

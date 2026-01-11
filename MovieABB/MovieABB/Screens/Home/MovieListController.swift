@@ -12,6 +12,7 @@ import SnapKit
 public final class MovieListController: UIViewController {
     
     private var viewModel: MovieListViewModel
+    private let viewStateHandler = ViewStateHandler()
     
     //MARK: - UIElements
     
@@ -75,6 +76,7 @@ public final class MovieListController: UIViewController {
         addSubviews()
         setupConstraints()
         view.backgroundColor = UIColor(named: "backgroundGray")
+        viewStateHandler.attach(to: self)
     }
     
     private func addSubviews() {
@@ -105,12 +107,13 @@ public final class MovieListController: UIViewController {
     }
 
     private func bindViewModel() {
-        viewModel.onDataReload = { [weak self] in
-            DispatchQueue.main.async {
-                self?.collectionView.reloadData()
+        viewModel.onStateChange = { [weak self] state in
+            guard let self else { return }
+            self.viewStateHandler.handle(state, in: self) {
+                self.collectionView.reloadData()
             }
         }
-        searchView.onSearch = { [weak self] text in
+        searchView.onTextChange = { [weak self] text in
             self?.viewModel.searchMovies(query: text)
         }
     }
