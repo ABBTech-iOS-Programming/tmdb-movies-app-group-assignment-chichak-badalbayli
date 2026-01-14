@@ -220,7 +220,7 @@ extension MovieListController: UICollectionViewDataSource {
 
             cell.configure(
                 with: viewModel.trendingMovies[indexPath.item],
-                rank: indexPath.item
+                rank: indexPath.item + 1
             )
             return cell
         case 1:
