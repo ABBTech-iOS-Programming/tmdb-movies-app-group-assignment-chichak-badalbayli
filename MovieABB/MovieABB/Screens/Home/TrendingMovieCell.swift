@@ -25,7 +25,7 @@ final class TrendingMovieCell: UICollectionViewCell {
 
     private let rankingLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 96, weight: .semibold)
+        label.font = UIFont(name: "Montserrat-SemiBold", size: 96)
         return label
     }()
 
@@ -65,6 +65,12 @@ final class TrendingMovieCell: UICollectionViewCell {
     private func setupUI() {
         addSubviews()
         setupConstraints()
+//        if let url = Bundle.main.url(forResource: "Montserrat-SemiBold", withExtension: "ttf"),
+//           let dataProvider = CGDataProvider(url: url as CFURL),
+//           let cgFont = CGFont(dataProvider) {
+//
+//            print("PostScript name:", cgFont.postScriptName as String? ?? "nil")
+//        }
     }
     
     private func addSubviews() {
