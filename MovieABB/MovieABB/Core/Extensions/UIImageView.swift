@@ -16,7 +16,6 @@ extension UIImageView {
         }
         kf.setImage(
             with: url,
-            placeholder: UIImage(systemName: "photo"),
             options: [.transition(.fade(0.25))]
         )
     }

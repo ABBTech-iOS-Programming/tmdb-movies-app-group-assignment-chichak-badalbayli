@@ -65,12 +65,6 @@ final class TrendingMovieCell: UICollectionViewCell {
     private func setupUI() {
         addSubviews()
         setupConstraints()
-//        if let url = Bundle.main.url(forResource: "Montserrat-SemiBold", withExtension: "ttf"),
-//           let dataProvider = CGDataProvider(url: url as CFURL),
-//           let cgFont = CGFont(dataProvider) {
-//
-//            print("PostScript name:", cgFont.postScriptName as String? ?? "nil")
-//        }
     }
     
     private func addSubviews() {
