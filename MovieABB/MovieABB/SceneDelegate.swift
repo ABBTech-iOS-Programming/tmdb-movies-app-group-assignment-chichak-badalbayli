@@ -11,16 +11,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-
-    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+    func scene(
+        _ scene: UIScene,
+        willConnectTo session: UISceneSession,
+        options connectionOptions: UIScene.ConnectionOptions
+    ) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
-        window = UIWindow(windowScene: windowScene)
-        let networkService = DefaultNetworkService()
-       // let viewModel = PostsListViewModel(networkService: networkService)
-        let postVC = MovieListController(viewModel: MovieListViewModel())
-        let navigationController = UINavigationController(rootViewController: postVC)
-        window?.rootViewController = navigationController
-        window?.makeKeyAndVisible()
+
+        let window = UIWindow(windowScene: windowScene)
+        window.rootViewController = MainTabBarController()
+        self.window = window
+        window.makeKeyAndVisible()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
